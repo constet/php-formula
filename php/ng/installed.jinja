@@ -60,6 +60,16 @@ php_{{ phpng_version }}_link:
   {% endif %}
 {% endif %}
 
+{% if grains['os_family'] == "RedHat" and grains['osmajorrelease'] == '7' %}
+{% set use_webtactic = salt['pillar.get']('php:ng:use_webtactic', False) %}
+{% if use_webtactic %}
+webtactic-php-repo_{{ state }}:
+  pkg.installed:
+    - sources:
+      - webtatic-release: https://mirror.webtatic.com/yum/el7/webtatic-release.rpm
+{% endif %}
+{% endif %}
+
 php_install_{{ state }}:
   pkg.installed:
     - name: {{ state }}
