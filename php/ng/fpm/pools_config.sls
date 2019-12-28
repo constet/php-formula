@@ -9,7 +9,7 @@
 
 {% set pool_states = [] %}
 
-{% for pool, config in php.fpm.pools.iteritems() %}
+{% for pool, config in php.fpm.pools.items() %}
 {% set state = 'php_fpm_pool_conf_' ~ loop.index0 %}
 {% set fpath = path_join(config.get('filename', pool), php.lookup.fpm.pools) %}
 
